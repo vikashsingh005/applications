@@ -27,7 +27,7 @@ RUN chmod 700 /root/.ssh/id_rsa && \
 #Git clone the repository
 RUN apt-get install -y git && \
         cd /opt && \
-        git clone git@github.com:guysyml/formsappdev-v1.git && \
+        git clone git@github.com:guysyml/formsapp.git && \
         apt-get update && apt-get install --force-yes -y maven && \
         cd /opt/formsapp/syml-odoo-middle && mvn clean install && \
         cd /opt && wget mirrors.koehn.com/apache/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz && tar -xvf apache-tomcat-8.0.28.tar.gz && \

@@ -27,17 +27,17 @@ RUN chmod 700 /root/.ssh/id_rsa && \
 #Git clone the repository
 RUN apt-get install -y git && \
         cd /opt && \
-        git clone git@github.com:guysyml/formsapp.git && \
+        git clone git@github.com:guysyml/formsappdev-v1.git && \
         apt-get update && apt-get install --force-yes -y maven && \
         cd /opt/formsapp/syml-odoo-middle && mvn clean install && \
-        cd /opt && wget mirrors.koehn.com/apache/tomcat/tomcat-8/v8.0.23/bin/apache-tomcat-8.0.23.tar.gz && tar -xvf apache-tomcat-8.0.23.tar.gz && \
-        cd /opt/formsapp/syml-odoo-middle/target && mv *.war formsapp.war && cp formsapp.war  /opt/apache-tomcat-8.0.23/webapps
+        cd /opt && wget mirrors.koehn.com/apache/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz && tar -xvf apache-tomcat-8.0.28.tar.gz && \
+        cd /opt/formsapp/syml-odoo-middle/target && mv *.war formsapp.war && cp formsapp.war  /opt/apache-tomcat-8.0.28/webapps
 
 # Expose the default tomcat port
 EXPOSE 8080
 
-RUN  /opt/apache-tomcat-8.0.23/bin/catalina.sh start && sleep 10 && \
-     echo '#!/bin/bash\nsed -i "s/OPENERP_HOST_NAME/$OPENERP_HOST_NAME/;s/OPENERP_PORT/$OPENERP_PORT/;s/OPENERP_DB_NAME/$OPENERP_DB_NAME/;s/OPENERP_USERNAME/$OPENERP_USERNAME/;s/OPENERP_PASSWORD/$OPENERP_PASSWORD/;s/COUCHBASE_HOST_2/$COUCHBASE_HOST_2/;s/COUCHBASE_BUCKET_NAME/$COUCHBASE_BUCKET_NAME/;s/COUCHBASE_BUCKET_PASSWORD/$COUCHBASE_BUCKET_PASSWORD/;" /opt/apache-tomcat-8.0.23/webapps/formsapp/WEB-INF/classes/config.properties' > /start && \
+RUN  /opt/apache-tomcat-8.0.28/bin/catalina.sh start && sleep 10 && \
+     echo '#!/bin/bash\nsed -i "s/OPENERP_HOST_NAME/$OPENERP_HOST_NAME/;s/OPENERP_PORT/$OPENERP_PORT/;s/OPENERP_DB_NAME/$OPENERP_DB_NAME/;s/OPENERP_USERNAME/$OPENERP_USERNAME/;s/OPENERP_PASSWORD/$OPENERP_PASSWORD/;s/COUCHBASE_HOST_2/$COUCHBASE_HOST_2/;s/COUCHBASE_BUCKET_NAME/$COUCHBASE_BUCKET_NAME/;s/COUCHBASE_BUCKET_PASSWORD/$COUCHBASE_BUCKET_PASSWORD/;" /opt/apache-tomcat-8.0.28/webapps/formsapp/WEB-INF/classes/config.properties' > /start && \
 
         chmod +x /start
 

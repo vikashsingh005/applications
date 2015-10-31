@@ -1,6 +1,6 @@
 ## FORMS APPLICATION
 FROM ubuntu:15.04
-MAINTAINER Vijay <vijay.kumar@bizruntime.com>
+MAINTAINER vikash <vijay.kumar@bizruntime.com>
 
 #Oracle Java 7
 RUN \
